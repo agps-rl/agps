@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accelerating Robotic Reinforcement Learning with Agent Guidance</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Title -->
+        <header class="header">
+            <h1 class="title">Accelerating Robotic Reinforcement Learning with Agent Guidance</h1>
+        </header>
+
+        <!-- Authors -->
+        <section class="authors">
+            <div class="author-list">
+                <span class="author">Haojun Chen<sup>1,2†</sup></span>
+                <span class="author">Zili Zou<sup>2†</sup></span>
+                <span class="author">Chengdong Ma<sup>1</sup></span>
+                <span class="author">Yaoxiang Pu<sup>2</sup></span>
+                <span class="author">Haotong Zhang<sup>1,2</sup></span>
+                <span class="author">Yuanpei Chen<sup>1,2✉</sup></span>
+                <span class="author">Yaodong Yang<sup>1,2✉</sup></span>
+            </div>
+            <div class="affiliations">
+                <div class="affiliation">
+                    <sup>1</sup>Institute for Artificial Intelligence, Peking University
+                </div>
+                <div class="affiliation">
+                    <sup>2</sup>PKU-PsiBot Joint Lab
+                </div>
+            </div>
+            <div class="author-notes">
+                <span class="note">†Equal contribution</span>
+                <span class="note">✉Corresponding authors</span>
+            </div>
+        </section>
+
+        <!-- Links -->
+        <section class="links">
+            <a href="#" class="link-button">
+                <i class="fas fa-file-pdf"></i>
+                <span>Paper</span>
+            </a>
+            <a href="#experiments" class="link-button">
+                <i class="fas fa-video"></i>
+                <span>Videos</span>
+            </a>
+            <a href="#" class="link-button">
+                <i class="fab fa-github"></i>
+                <span>Code</span>
+            </a>
+        </section>
+
+        <!-- Abstract -->
+        <section class="abstract">
+            <h2>Abstract</h2>
+            <p>
+                Reinforcement Learning (RL) offers a powerful paradigm for autonomous robots to master generalist manipulation skills through trial-and-error. However, its real-world application is stifled by severe sample inefficiency. Recent Human-in-the-Loop (HIL) methods accelerate training by using human corrections, yet this approach faces a scalability barrier. Reliance on human supervisors imposes a 1:1 supervision ratio that limits fleet expansion, suffers from operator fatigue over extended sessions, and introduces high variance due to inconsistent human proficiency.
+            </p>
+            <p>
+                We present <strong>Agent-guided Policy Search (AGPS)</strong>, a framework that automates the training pipeline by replacing human supervisors with a multimodal agent. Our key insight is that the agent can be viewed as a semantic world model, injecting intrinsic value priors to structure physical exploration. By using executable tools, the agent provides precise guidance via corrective waypoints and spatial constraints for exploration pruning. We validate our approach on two tasks, ranging from precision insertion to deformable object manipulation. <strong>Results demonstrate that AGPS outperforms HIL methods in sample efficiency.</strong> This automates the supervision pipeline, unlocking the path to labor-free and scalable robot learning.
+            </p>
+        </section>
+
+        <!-- Pipeline -->
+        <section class="pipeline">
+            <h2>Pipeline</h2>
+            <div class="pipeline-content">
+                <img src="overview_0131.png" alt="AGPS Pipeline Overview" class="pipeline-image">
+            </div>
+        </section>
+
+        <!-- Experiments -->
+        <section class="experiments" id="experiments">
+            <h2>Experiments</h2>
+            <p class="experiments-note">Click on each experiment to view videos. Videos load only when you expand the section.</p>
+            
+            <div class="experiment">
+                <h3 class="experiment-header" onclick="toggleExperiment('usb-insert')">
+                    <span>USB Insert</span>
+                    <i class="fas fa-chevron-down"></i>
+                </h3>
+                <div class="experiment-content" id="usb-insert" style="display: none;">
+                    <div class="video-grid comparison-grid">
+                        <!-- AGPS (AIL) Method -->
+                        <div class="video-section">
+                            <h4>
+                                <span class="method-badge agps">AGPS (Our Method)</span>
+                            </h4>
+                            
+                            <!-- Training Video -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Training Process</span>
+                                </div>
+                                <div class="video-wrapper">
+                                    <video controls preload="none" loading="lazy">
+                                        <source src="USB_Insertion_processed/agps_train_processed.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-note">8x speed</div>
+                            </div>
+                            
+                            <!-- Evaluation Videos -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Evaluation Results</span>
+                                </div>
+                                <div class="eval-videos">
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="USB_Insertion_processed/ail_ckpt400_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 400 (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="USB_Insertion_processed/ail_ckpt600_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 600 (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="USB_Insertion_processed/ail_ckpt800_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 800 (4x speed)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- HIL Baseline Method -->
+                        <div class="video-section">
+                            <h4>
+                                <span class="method-badge hil">HIL (Baseline)</span>
+                            </h4>
+                            
+                            <!-- Training Video -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Training Process</span>
+                                </div>
+                                <div class="video-wrapper">
+                                    <video controls preload="none" loading="lazy">
+                                        <source src="USB_Insertion_processed/hil_train_processed.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-note">8x speed</div>
+                            </div>
+                            
+                            <!-- Evaluation Videos -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Evaluation Results</span>
+                                </div>
+                                <div class="eval-videos">
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="USB_Insertion_processed/hil_ckpt400_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 400 (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="USB_Insertion_processed/hil_ckpt600_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 600 (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="USB_Insertion_processed/hil_ckpt800_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 800 (4x speed)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experiment">
+                <h3 class="experiment-header" onclick="toggleExperiment('chinese-knot')">
+                    <span>Hang Chinese Knot</span>
+                    <i class="fas fa-chevron-down"></i>
+                </h3>
+                <div class="experiment-content" id="chinese-knot" style="display: none;">
+                    <div class="video-grid comparison-grid">
+                        <!-- AGPS (AIL) Method -->
+                        <div class="video-section">
+                            <h4>
+                                <span class="method-badge agps">AGPS (Our Method)</span>
+                            </h4>
+                            
+                            <!-- Training Video -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Training Process</span>
+                                </div>
+                                <div class="video-wrapper">
+                                    <video controls preload="none" loading="lazy">
+                                        <source src="chinese_knot_processed/ail_train_processed.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-note">8x speed</div>
+                            </div>
+                            
+                            <!-- Evaluation Videos -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Evaluation Results</span>
+                                </div>
+                                <div class="eval-videos">
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="chinese_knot_processed/ail_ckpt1000_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 1000 (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="chinese_knot_processed/ail_ckpt2000_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 2000 (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="chinese_knot_processed/ail_ckpt3000_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 3000 (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="chinese_knot_processed/ail_ckpt4000_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 4000 (4x speed)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- HIL Baseline Method -->
+                        <div class="video-section">
+                            <h4>
+                                <span class="method-badge hil">HIL (Baseline)</span>
+                            </h4>
+                            
+                            <!-- Training Video -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Training Process</span>
+                                </div>
+                                <div class="video-wrapper">
+                                    <video controls preload="none" loading="lazy">
+                                        <source src="chinese_knot_processed/hil_train_processed.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-note">8x speed</div>
+                            </div>
+                            
+                            <!-- Evaluation Videos -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Evaluation Results</span>
+                                </div>
+                                <div class="eval-videos">
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="chinese_knot_processed/hil_ckpt1000_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 1000 (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="chinese_knot_processed/hil_ckpt2000_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 2000 (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="chinese_knot_processed/hil_ckpt3000_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 3000 (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="chinese_knot_processed/hil_ckpt4000_processed.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">Checkpoint 4000 (4x speed)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleExperiment(experimentId) {
+            const content = document.getElementById(experimentId);
+            const header = content.previousElementSibling;
+            const icon = header.querySelector('i');
+            
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+                
+                // Load videos when expanding
+                const videos = content.querySelectorAll('video[preload="none"]');
+                videos.forEach(video => {
+                    video.setAttribute('preload', 'metadata');
+                });
+            } else {
+                content.style.display = 'none';
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+        
+        // Check if URL has #experiments hash
+        document.addEventListener('DOMContentLoaded', function() {
+            // If navigating to experiments section, auto-expand first experiment
+            if (window.location.hash === '#experiments') {
+                setTimeout(() => {
+                    toggleExperiment('usb-insert');
+                }, 500); // Small delay for smooth scroll to complete
+            }
+        });
+        
+        // Listen for hash changes (when clicking Videos link)
+        window.addEventListener('hashchange', function() {
+            if (window.location.hash === '#experiments') {
+                // Check if first experiment is collapsed
+                const firstExperiment = document.getElementById('usb-insert');
+                if (firstExperiment.style.display === 'none' || firstExperiment.style.display === '') {
+                    setTimeout(() => {
+                        toggleExperiment('usb-insert');
+                    }, 500);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
