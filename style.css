@@ -215,6 +215,21 @@ html {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.pipeline-figure {
+    margin: 0 auto;
+    max-width: 85%;
+    text-align: center;
+}
+
+.pipeline-figure figcaption {
+    margin-top: 12px;
+    font-size: 0.88rem;
+    color: var(--text-secondary, #555);
+    line-height: 1.6;
+    text-align: left;
+    font-style: italic;
+}
+
 /* Experiments Section */
 .experiments {
     margin-bottom: 50px;
@@ -466,6 +481,10 @@ html {
     }
 
     .pipeline-image {
+        max-width: 100%;
+    }
+
+    .pipeline-figure {
         max-width: 100%;
     }
 }

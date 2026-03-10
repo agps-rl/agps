@@ -25,7 +25,7 @@
                 <span class="author">Chengdong Ma<sup>1</sup></span>
                 <span class="author">Yaoxiang Pu<sup>2</sup></span>
                 <span class="author">Haotong Zhang<sup>1,2</sup></span>
-                <span class="author">Yuanpei Chen<sup>1,2✉</sup></span>
+                <span class="author">Yuanpei Chen<sup>1,2</sup></span>
                 <span class="author">Yaodong Yang<sup>1,2✉</sup></span>
             </div>
             <div class="affiliations">
@@ -44,7 +44,7 @@
 
         <!-- Links -->
         <section class="links">
-            <a href="#" class="link-button">
+            <a href="https://arxiv.org/abs/2602.11978" class="link-button" target="_blank" rel="noopener noreferrer">
                 <i class="fas fa-file-pdf"></i>
                 <span>Paper</span>
             </a>
@@ -62,10 +62,10 @@
         <section class="abstract">
             <h2>Abstract</h2>
             <p>
-                Reinforcement Learning (RL) offers a powerful paradigm for autonomous robots to master generalist manipulation skills through trial-and-error. However, its real-world application is stifled by severe sample inefficiency. Recent Human-in-the-Loop (HIL) methods accelerate training by using human corrections, yet this approach faces a scalability barrier. Reliance on human supervisors imposes a 1:1 supervision ratio that limits fleet expansion, suffers from operator fatigue over extended sessions, and introduces high variance due to inconsistent human proficiency.
+                Reinforcement Learning (RL) offers a powerful paradigm for autonomous robots to master generalist manipulation skills through trial-and-error. However, its real-world application is stifled by low sample efficiency. Recent Human-in-the-Loop (HIL) methods accelerate training by using human corrections, yet this approach faces a scalability barrier. Reliance on human supervisors imposes a 1:1 supervision ratio that limits scalability, suffers from operator fatigue over extended sessions, and introduces high variance due to inconsistent human proficiency.
             </p>
             <p>
-                We present <strong>Agent-guided Policy Search (AGPS)</strong>, a framework that automates the training pipeline by replacing human supervisors with a multimodal agent. Our key insight is that the agent can be viewed as a semantic world model, injecting intrinsic value priors to structure physical exploration. By using executable tools, the agent provides precise guidance via corrective waypoints and spatial constraints for exploration pruning. We validate our approach on two tasks, ranging from precision insertion to deformable object manipulation. <strong>Results demonstrate that AGPS outperforms HIL methods in sample efficiency.</strong> This automates the supervision pipeline, unlocking the path to labor-free and scalable robot learning.
+                We present <strong>Agent-guided Policy Search (AGPS)</strong>, a framework that automates the training pipeline by replacing human supervisors with a multimodal agent. Our key insight is that the agent can be viewed as a semantic world model, injecting intrinsic value priors to structure physical exploration. By using tools, the agent provides precise guidance via corrective waypoints and spatial constraints for exploration pruning. We validate our approach on three tasks, ranging from precision insertion to deformable object manipulation. <strong>Results demonstrate that AGPS outperforms HIL methods in sample efficiency.</strong> This automates the supervision pipeline, unlocking the path to labor-free and scalable robot learning.
             </p>
         </section>
 
@@ -73,7 +73,10 @@
         <section class="pipeline">
             <h2>Pipeline</h2>
             <div class="pipeline-content">
-                <img src="overview_0131.png" alt="AGPS Pipeline Overview" class="pipeline-image">
+                <figure class="pipeline-figure">
+                    <img src="overview_0302.png" alt="AGPS Pipeline Overview" class="pipeline-image">
+                    <figcaption><strong>Overview.</strong> Left: HIL methods encounter a scalability barrier as task complexity rises, restricted by the 1:1 supervision ratio and operator fatigue. Right: AGPS transcends this barrier by automating supervision. The system employs FLOAT as an asynchronous trigger to monitor policy performance. When a deviation is detected, the agent recalls memory and leverages a toolbox (Action Primitives, Perception, Geometry) for spatial reasoning with an RGBD image and task description. These interventions manifest as Action Guidance for trajectory correction and Exploration Pruning for spatial constraining.</figcaption>
+                </figure>
             </div>
         </section>
 
@@ -124,7 +127,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 400 (4x speed)</div>
+                                        <div class="video-note">After training 4.1 min (4x speed)</div>
                                     </div>
                                     <div>
                                         <div class="video-wrapper">
@@ -133,7 +136,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 600 (4x speed)</div>
+                                        <div class="video-note">After training 7.6 min (4x speed)</div>
                                     </div>
                                     <div>
                                         <div class="video-wrapper">
@@ -142,7 +145,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 800 (4x speed)</div>
+                                        <div class="video-note">After training 11.1 min (4x speed)</div>
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +186,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 400 (4x speed)</div>
+                                        <div class="video-note">After training 4.1 min (4x speed)</div>
                                     </div>
                                     <div>
                                         <div class="video-wrapper">
@@ -192,7 +195,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 600 (4x speed)</div>
+                                        <div class="video-note">After training 7.6 min (4x speed)</div>
                                     </div>
                                     <div>
                                         <div class="video-wrapper">
@@ -201,7 +204,189 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 800 (4x speed)</div>
+                                        <div class="video-note">After training 11.1 min (4x speed)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="experiment">
+                <h3 class="experiment-header" onclick="toggleExperiment('fold-towel')">
+                    <span>Fold Towel</span>
+                    <i class="fas fa-chevron-down"></i>
+                </h3>
+                <div class="experiment-content" id="fold-towel" style="display: none;">
+                    <div class="video-grid comparison-grid">
+                        <!-- AGPS Method -->
+                        <div class="video-section">
+                            <h4>
+                                <span class="method-badge agps">AGPS (Our Method)</span>
+                            </h4>
+
+                            <!-- Training Video -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Training Process</span>
+                                </div>
+                                <div class="video-wrapper">
+                                    <video controls preload="none" loading="lazy">
+                                        <source src="fold_towel_no_voice_processed/agps_train.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-note">16x speed</div>
+                            </div>
+
+                            <!-- Evaluation Videos -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Evaluation Results</span>
+                                </div>
+                                <div class="eval-videos">
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/ail_72000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 41 min (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/ail_76000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 48 min (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/ail_80000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 55 min (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/ail_84000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 62 min (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/ail_88000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 68 min (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/ail_92000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 75 min (4x speed)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ConRFT Baseline Method -->
+                        <div class="video-section">
+                            <h4>
+                                <span class="method-badge hil">ConRFT</span>
+                            </h4>
+
+                            <!-- Training Video -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Training Process</span>
+                                </div>
+                                <div class="video-wrapper">
+                                    <video controls preload="none" loading="lazy">
+                                        <source src="fold_towel_no_voice_processed/conrft_train.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-note">16x speed</div>
+                            </div>
+
+                            <!-- Evaluation Videos -->
+                            <div class="video-container">
+                                <div class="video-label">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Evaluation Results</span>
+                                </div>
+                                <div class="eval-videos">
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/conrft_72000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 41 min (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/conrft_76000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 48 min (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/conrft_80000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 55 min (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/conrft_84000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 62 min (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/conrft_88000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 68 min (4x speed)</div>
+                                    </div>
+                                    <div>
+                                        <div class="video-wrapper">
+                                            <video controls preload="none" loading="lazy">
+                                                <source src="fold_towel_no_voice_processed/conrft_92000.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                        <div class="video-note">After training 75 min (4x speed)</div>
                                     </div>
                                 </div>
                             </div>
@@ -252,7 +437,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 1000 (4x speed)</div>
+                                        <div class="video-note">After training 26 min (4x speed)</div>
                                     </div>
                                     <div>
                                         <div class="video-wrapper">
@@ -261,7 +446,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 2000 (4x speed)</div>
+                                        <div class="video-note">After training 34 min (4x speed)</div>
                                     </div>
                                     <div>
                                         <div class="video-wrapper">
@@ -270,7 +455,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 3000 (4x speed)</div>
+                                        <div class="video-note">After training 42 min (4x speed)</div>
                                     </div>
                                     <div>
                                         <div class="video-wrapper">
@@ -279,7 +464,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 4000 (4x speed)</div>
+                                        <div class="video-note">After training 50 min (4x speed)</div>
                                     </div>
                                 </div>
                             </div>
@@ -320,7 +505,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 1000 (4x speed)</div>
+                                        <div class="video-note">After training 26 min (4x speed)</div>
                                     </div>
                                     <div>
                                         <div class="video-wrapper">
@@ -329,7 +514,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 2000 (4x speed)</div>
+                                        <div class="video-note">After training 34 min (4x speed)</div>
                                     </div>
                                     <div>
                                         <div class="video-wrapper">
@@ -338,7 +523,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 3000 (4x speed)</div>
+                                        <div class="video-note">After training 42 min (4x speed)</div>
                                     </div>
                                     <div>
                                         <div class="video-wrapper">
@@ -347,7 +532,7 @@
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                        <div class="video-note">Checkpoint 4000 (4x speed)</div>
+                                        <div class="video-note">After training 50 min (4x speed)</div>
                                     </div>
                                 </div>
                             </div>
